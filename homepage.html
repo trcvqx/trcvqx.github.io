@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>One Message Away</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: url("homepage.png") center/cover no-repeat;
+            font-family: 'Tektur', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 55px;
+            text-shadow: black 3px 3px 6px;
+            text-align: center;
+            color: white;
+        }
+
+        #typing-text {
+            border-right: 2px solid white;  
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% { border-color: white; }
+            25%, 75% { border-color: transparent; }
+        }
+
+        .start-btn {
+            padding: 14px 32px;
+            font-family: Tektur ;
+            font-size: 18px;
+            font-weight: 550;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #3b82f6, #22c55e);
+            color: white;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .start-btn:hover {
+            background: black;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+        }
+
+        .start-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <h1><span id="typing-text"></span></h1>
+
+    <button class="start-btn" onclick="startGame()">Start ►</button>
+
+    <script>
+        const text = "One Message Away";
+        const typingElement = document.getElementById("typing-text");
+        let index = 0;
+
+        function typeEffect() {
+            if (index < text.length) {
+                typingElement.textContent += text.charAt(index);
+                index++;
+                setTimeout(typeEffect, 120); 
+            }
+        }
+
+        window.onload = typeEffect;
+
+        function startGame() {
+            window.location.href = "page2.html";
+        }
+    </script>
+</body>
+</html>
