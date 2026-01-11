@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>task 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+body {
+    background: url("task-3-reject.png") no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+}
+
+.right-half-container {
+    width: 50vw;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 50px;
+    gap: 30px;
+}
+
+.text-box-right {
+    background: transparent;
+    padding: 30px;
+    border-radius: 12px;
+    color: black;
+    font-family: Tektur;
+    font-size: 28px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+#heading-cursor {
+    display: inline-block;
+    margin-left: 4px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}
+
+.option-box {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    font-family: Tektur;
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
+    margin-top: -1px;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+.option-box.show {
+    opacity: 0.5;
+    pointer-events: auto;
+}
+.option-box:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+</style>
+</head>
+<body>
+
+<div class="right-half-container">
+    <div class="text-box-right">
+    <span id="heading-text"></span><span id="heading-cursor">|</span>
+</div>
+
+<div class="option-box" onclick="window.location.href='task3-insist.html'">
+    Insist on leaving
+</div>
+
+<div class="option-box" onclick="window.location.href='task3-listen.html'">
+    Listen to Jamie's question
+</div>
+
+<script>
+    const headingText =
+        "You pretend you're busy, but Jamie seems to want to continue talking. What do you do next?";
+
+    const headingElement = document.getElementById("heading-text");
+    const headingCursor = document.getElementById("heading-cursor");
+    const options = document.querySelectorAll(".option-box");
+
+    let hIndex = 0;
+
+    function typeHeading() {
+        if (hIndex < headingText.length) {
+            headingElement.textContent += headingText.charAt(hIndex);
+            hIndex++;
+            setTimeout(typeHeading, 25);
+        } else {
+            headingCursor.style.display = "none";
+
+            options.forEach(option => {
+                option.classList.add("show");
+            });
+        }
+    }
+
+    window.onload = typeHeading;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Page 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Tektur', sans-serif;
+    height: 100vh;
+    background: #000;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;     
+    justify-content: flex-start; 
+    position: relative;
+}
+
+#phone-img {
+    position: fixed;     
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;           
+}
+
+.text-box {
+    position: relative;
+    z-index: 1;
+    background: rgba(0,0,0,0.6);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    text-shadow: 3px 3px 6px black;
+    width: 800px;
+    word-wrap: break-word;
+    margin: 20px;
+}
+
+#typing-text {
+    border-right: 2px solid white;
+    display: inline;
+    white-space: pre-wrap;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%,50%,100% { border-color: white; }
+    25%,75% { border-color: transparent; }
+}
+
+#continue-text {
+    position: absolute;
+    z-index: 2;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Tektur', sans-serif;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+</style>
+</head>
+<body>
+
+<div class="text-box">
+    <span id="typing-text"></span>
+</div>
+
+<img id="phone-img" src="phone.png" usemap="#image-map" alt="Phone">
+
+<map name="image-map">
+   <area
+  alt="phone"
+  title="phone"
+  href="task 1.html"
+  target="_self"
+  shape="poly"
+  coords="331,261,429,220,617,284,619,304,514,354,329,282">
+</map>
+
+<h2 id="continue-text">Click the phone to continue...</h2>
+
+<script>
+const text = "On a fine Saturday morning, you receive a DM on social media from an unknown account.";
+const typingElement = document.getElementById("typing-text");
+const continueText = document.getElementById("continue-text");
+let index = 0;
+
+function typeEffect() {
+    if(index < text.length) {
+        typingElement.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeEffect,30); 
+    } else {
+        continueText.style.display = "block";
+    }
+}
+window.onload = typeEffect;
+
+continueText.addEventListener("click", function(){
+    alert("Next step");
+});
+
+const phoneImg = document.getElementById('phone-img');
+const areas = document.querySelectorAll('area');
+
+
+areas.forEach(area => area.dataset.coords = area.coords);
+
+function scaleMap() {
+    const scaleX = phoneImg.clientWidth / 960;  
+    const scaleY = phoneImg.clientHeight / 540; 
+
+    areas.forEach(area => {
+        const coords = area.dataset.coords.split(',').map(Number);
+        const scaled = coords.map((c,i) => i % 2 === 0 ? c*scaleX : c*scaleY);
+        area.coords = scaled.map(c => Math.round(c)).join(',');
+    });
+}
+
+phoneImg.onload = scaleMap;
+window.addEventListener('resize', scaleMap);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>task 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+body {
+    background: url("task-1.png") no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+}
+
+.right-half-container {
+    width: 50vw;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 50px;
+    gap: 30px;
+}
+
+.text-box-right {
+    background: transparent;
+    padding: 30px;
+    border-radius: 12px;
+    color: black;
+    font-family: Tektur;
+    font-size: 28px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.option-box {
+    background: white;
+    opacity: 50%;
+    padding: 18px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    font-family: Tektur;
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
+    margin-top: -1px;
+}
+
+.option-box:hover {
+    background: rgba(255,255,255,0.3);
+}
+</style>
+</head>
+<body>
+
+<div class="right-half-container">
+    <div class="text-box-right">
+        You don't know this person. <br>
+        What do you do next?
+    </div>
+
+    <div class="option-box" onclick="window.location.href='task2.html'"></onclick> Reply, they're a schoolmate!</div>
+    <div class="option-box" onclick="window.location.href='profile.html'"></onclick>Check their profile</div>
+    <div class="option-box" onclick="window.location.href='profile.html'"></onclick>Ignore it</div>
+</div>
+
+</body>
+</html>

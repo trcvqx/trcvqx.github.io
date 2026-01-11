@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>accept message</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Tektur', sans-serif;
+    background: url(task-2.png) no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.right-container {
+    width: 40vw;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: transparent;
+    border-radius: 12px;
+    
+}
+
+#typing-text {
+    font-size: 25px;
+    color: black;
+    white-space: pre-wrap;
+}
+
+#cursor {
+    display: inline-block;
+    margin-left: 2px;
+    animation: blink 1s steps(1) infinite;
+    color: black;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}
+
+button {
+    padding: 14px 32px;
+    font-family: Tektur;
+    font-size: 18px;
+    font-weight: 550;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #3b82f6, #22c55e);
+    margin-top: 30px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+    background: black;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+</style>
+</head>
+<body>
+
+<div class="right-container">
+    <div>
+        <span id="typing-text"></span><span id="cursor">|</span>
+    </div>
+
+    <button onclick="location.href='./profile.html'">
+        Next
+    </button>
+</div>
+
+<script>
+const text = "That sounds fishy. You decide to check out the account.";
+const typingElement = document.getElementById("typing-text");
+let index = 0;
+
+function typeEffect() {
+    if (index < text.length) {
+        typingElement.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeEffect, 40);
+    }
+}
+
+window.onload = typeEffect;
+</script>
+
+</body>
+</html>

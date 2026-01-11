@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>One Message Away</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            color: white;
+            font-family: 'Tektur', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: white;
+        }
+
+        h1 {
+            font-size: 55px;
+            text-shadow: black 3px 3px 6px;
+            text-align: center;
+            color: green;
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0; }
+        }
+
+        .restart-btn {
+            padding: 14px 32px;
+            font-family: Tektur ;
+            font-size: 18px;
+            font-weight: 550;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #3b82f6, #22c55e);
+            color: white;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .restart-btn:hover {
+            background: black;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+        }
+
+        .restart-btn:active {
+            transform: scale(0.98);
+        }
+        .ending-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .ending-text {
+            font-size: 26px;
+            margin-top: 10px;
+            color: black;
+        }
+
+        .ending-body {
+            display: none;
+            font-size: 18px;
+            margin-top: 20px;
+            line-height: 1.6;
+            max-width: 600px;
+            color: black;
+        }
+        #ending-cursor {
+            display: none;     
+            color: black;
+            animation: blink 1s infinite;
+        }
+        .restart-btn {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="ending-container">
+
+
+    <h1>
+        <span id="bad-ending"></span>
+    </h1>
+
+    <div class="ending-text">
+        <span id="ending-heading"></span><span id="ending-cursor">|</span>
+    </div>
+
+    <div class="ending-body" id="ending-body">
+        <span id="body-text"></span>
+    </div>
+
+</div>
+
+<button class="restart-btn" onclick="startGame()">Play again ⟳</button>
+<script>
+const badEndingText = "GOOD ENDING!";
+const headingText = "Good job! When faced with texts from unknown accounts and suspicious people, remember to stay vigilant.";
+const bodyText =
+    "Scammers often build trust before asking for money or personal details. Once sent, it is almost impossible to recover. The safest move is to stop engaging and report the account.";
+
+const badEndingEl = document.getElementById("bad-ending");
+const headingEl = document.getElementById("ending-heading");
+const bodyEl = document.getElementById("body-text");
+const cursorEl = document.getElementById("ending-cursor");
+const bodyBox = document.getElementById("ending-body");
+
+let i = 0, h = 0, b = 0;
+
+function typeBadEnding() {
+    if (i < badEndingText.length) {
+        badEndingEl.textContent += badEndingText.charAt(i++);
+        setTimeout(typeBadEnding, 120);
+    } else {
+    setTimeout(() => {
+        cursorEl.style.display = "inline";
+        typeHeading();
+    }, 600);
+}
+
+}
+
+function typeHeading() {
+    if (h < headingText.length) {
+        headingEl.textContent += headingText.charAt(h++);
+        setTimeout(typeHeading, 30);
+    } else {
+        cursorEl.style.display = "none";
+        bodyBox.style.display = "block";
+        setTimeout(typeBody, 400);
+    }
+}
+
+function typeBody() {
+    if (b < bodyText.length) {
+        bodyEl.textContent += bodyText.charAt(b++);
+        setTimeout(typeBody, 20);
+    } else {
+        const btn = document.querySelector(".restart-btn");
+        btn.style.opacity = 1;
+        btn.style.pointerEvents = "auto";
+    }
+}
+
+window.onload = typeBadEnding;
+
+function startGame() {
+    window.location.href = "homepage.html";
+}
+</script>
+
+</body>
+</html>
